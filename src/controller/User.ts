@@ -9,17 +9,17 @@ require("dotenv").config();
 const secretKey: any = process.env.TOKEN_SECRET_KEY;
 
 export default class UserCallback {
-  // static async get(req: Request, res: Response) {
-  //   try {
-  //     const { id } = req.body;
-  //     console.log(id);
-  //     // const payload = await UserModel.find({id});
-  //     // console.log(payload);
-  //     // return res.json({ success: true, data: payload });
-  //   } catch (err) {
-  //     res.status(500).json({ error: err });
-  //   }
-  // }
+  static async get(req: Request, res: Response) {
+    try {
+      const { id } = req.body;
+      console.log(id);
+      // const payload = await UserModel.find({id});
+      // console.log(payload);
+      // return res.json({ success: true, data: payload });
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
+  }
 
   // static async create(req: Request, res: Response) {
   //   try {
