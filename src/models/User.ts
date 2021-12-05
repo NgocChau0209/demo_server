@@ -6,7 +6,6 @@ require("dotenv").config();
 export interface UserDoc extends Document {
   email: string;
   phoneNumber: string;
-  identify: string;
   userName: string;
   password: string;
   balance: number;
@@ -16,7 +15,6 @@ const UserSchema = new Schema<UserDoc>({
   email: defaultType.string,
   phoneNumber: defaultType.requiredString,
   userName: defaultType.requiredString,
-  identify: defaultType.requiredString,
   password: defaultType.requiredString,
   balance: defaultType.number,
 });

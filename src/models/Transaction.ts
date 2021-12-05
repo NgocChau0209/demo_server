@@ -7,7 +7,6 @@ export interface TransactionDoc extends Document {
   time: string;
   amount: number;
   message: string;
-  isIncome: boolean;
   /** 
   * 1: Chuyển tiền
   * 2: Nhận tiền 
@@ -19,30 +18,31 @@ export interface TransactionDoc extends Document {
   title: string;
   from: {
     type: Schema.Types.ObjectId,
+    ref: "User",
   },
   to: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  status: number;
 
 }
 
 const TransactionSchema = new Schema<TransactionDoc>({
-  time: defaultType.date,
+  time: defaultType.date_now,
   amount: defaultType.number,
-  message: defaultType.requiredString,
-  isIncome: defaultType.booleanFalse,
-  paymentIn: {
-    inApp: defaultType.boolean,
-    info: BankAccountSchema,
-  },
+  message: defaultType.string,
   balance: defaultType.number,
-  title: defaultType.requiredString,
-  userId: {
+  title: defaultType.string,
+  from: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
+  to: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  status: defaultType.number
 });
 
 export default TransactionSchema;

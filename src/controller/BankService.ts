@@ -35,7 +35,8 @@ export default class BankServiceCallback {
   }
   static async get(req: Request, res: Response) {
     try {
-      const payload = await BankServiceModel.aggregate([{ $match: { 'identify': '272709289' } }]);
+      const payload = await BankServiceModel.find({ 'identify': '272709289' });
+      // const payload = await BankServiceModel.aggregate([{ $match: { 'identify': '272709289' } }]);
       return res.json({ success: true, data: payload });
     } catch (err) {
       res.status(500).json({ error: err });
