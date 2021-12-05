@@ -9,7 +9,7 @@ UserRouter.post("/check-phone-number", UserCallback.checkPhoneNumberExist);
 UserRouter.post("/create", UserCallback.create);
 UserRouter.post("/login", UserCallback.login);
 // UserRouter.post("/create-new-user", UserCallback.create);
-// UserRouter.post("/", UserCallback.get);
+UserRouter.post("/", UserCallback.get);
 // UserRouter.post("/with-draw", UserCallback.withDraw);
 // UserRouter.post("/recharge", UserCallback.recharge);
 // UserRouter.get("/:id", UserCallback.getInfo);
