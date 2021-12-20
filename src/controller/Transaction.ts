@@ -10,9 +10,7 @@ export default class TransactionCallback {
     let { title, amount, message } = params;
     try {
       const payload = await TransactionModel.create({ title, amount, message });
-      console.log(payload);
       return payload.status
-
     }
     catch (err) {
     }
@@ -43,11 +41,39 @@ export default class TransactionCallback {
       { "$unwind": "$sender" },
       { $project: { income: { $cond: { if: { "$eq": ["$from", convertToMongoID(userId)] }, then: 0, else: 1 } }, amount: 1, message: 1, to: 1, title: 1, time: 1, "reciever": { userName: 1 }, "sender": { userName: 1 } } }
     ])
-    console.log(payload)
     return payload;
-    // return { amount: 100, message: 'hello' }
+  }
 
-
+  static async info(req: any, res: Response) {
+    try {
+      let { userId } = req;
+      let { id } = req.body;
+      const payload = await TransactionModel.aggregate([
+        { $match: { $and: [{ _id: convertToMongoID(id) }, { $or:[{ from: convertToMongoID(userId) }, { to: convertToMongoID(userId) }]}   ] }},
+        {
+          $lookup: {
+            from: "users",
+            localField: "to",
+            foreignField: '_id',
+            as: "reciever",
+          }
+        },
+        { "$unwind": "$reciever" },
+        {
+          $lookup: {
+            from: "users",
+            localField: "from",
+            foreignField: '_id',
+            as: "sender",
+          }
+        },
+        { "$unwind": "$sender" },
+        { $project: { income: { $cond: { if: { "$eq": ["$from", convertToMongoID(userId)] }, then: 0, else: 1 } }, amount: 1, message: 1, to: 1, title: 1, time: 1, "reciever": { userName: 1 }, "sender": { userName: 1 } } }
+      ])
+      return res.json({ success: true, data: payload });
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
   }
   static async get(req: any, res: Response) {
     try {

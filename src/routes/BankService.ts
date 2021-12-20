@@ -3,7 +3,6 @@ import BankServiceCallback from "../controller/BankService";
 
 const BankServiceRouter = Router();
 
-BankServiceRouter.get("/", BankServiceCallback.get);
 BankServiceRouter.post("/create", BankServiceCallback.create);
 BankServiceRouter.post("/getInfo", BankServiceCallback.getInfo);
 BankServiceRouter.post("/recharge", BankServiceCallback.recharge);

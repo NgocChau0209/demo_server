@@ -12,7 +12,8 @@ export interface BankServiceDoc extends Document {
   accountHolder: string;
   accountNumber: string;
   balance: number;
-  SWIFTCode: string;
+  type: string;
+  expiredate: string;
 }
 
 const BankServiceSchema = new Schema<BankServiceDoc>({
@@ -26,7 +27,8 @@ const BankServiceSchema = new Schema<BankServiceDoc>({
   accountHolder: defaultType.requiredString,
   accountNumber: defaultType.requiredString,
   balance: defaultType.number,
-  SWIFTCode: defaultType.requiredString
+  type: defaultType.requiredString,
+  expiredate: defaultType.requiredString
 });
 
 export default BankServiceSchema;

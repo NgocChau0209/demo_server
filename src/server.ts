@@ -1,5 +1,5 @@
 // import { saveStorage, getStorage } from './module/function';
-import express, { Request, Response } from "express";
+import express, { Request, response, Response } from "express";
 import connectDatabase from "./utils/connectDatabase";
 import cors from "cors";
 import morgan from "morgan";
@@ -55,9 +55,9 @@ app.use("/api/service/bank", BankServiceRouter);
 app.use("/api/bank-account", BankAccountRoute);
 app.use("/api/transaction", TransactionRouter);
 app.use('/graphql', graphqlHTTP({
-  schema: schema,  
+  schema: schema,
   rootValue: root,
-  graphiql: true,  
+  graphiql: true,
 }));
 
 app.listen(PORT, () => {
@@ -65,3 +65,24 @@ app.listen(PORT, () => {
 });
 
 
+// const OneSignal = require('onesignal-node');
+// const client = new OneSignal.Client(process.env.NOTI_APP_ID, process.env.NOTI_API_KEY);
+
+// const notification = {
+//   "app_id": process.env.NOTI_APP_ID,
+//   "included_segments": ["Subscribed Users"],
+//   "data": {"foo": "bar"},
+//   "contents": {"en": "English Message"}
+// }
+
+// client.createNotification(notification)
+//   .then((response: any) => {
+//     console.log('res', response.body);
+//   })
+//   .catch((e: any) => {
+//     console.log('error', e);
+//   });
+
+// client.viewNotifications().then((response: any)=>{
+  
+// })
